@@ -75,9 +75,7 @@
 //   return http.post(auth_apis.verify, formdata);
 // };
 
-// export const apiCall_refreshToken = async () => {
-//   return http.post(auth_apis.refreshToken);
-// };
+
 
 import http from "../../http";
 import { API_URLs } from "../../CONSTANTS";
@@ -122,5 +120,9 @@ export const apiCall_verify = async ({ phoneNumber, verifyCode,IsPhone }) => {
   formdata.append("MacAddress", "web");
 
   return http.post(auth_apis.verify, formdata);
+};
+
+export const apiCall_refreshToken = async () => {
+  return http.post(auth_apis.refreshToken);
 };
 

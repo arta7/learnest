@@ -24,6 +24,7 @@ const CoursesPage = () => {
       .then((resp) => {
         // console.log(resp.data.data);
         set_courses(resp.data.data);
+        console.log('resp.data.data',resp.data.data);
         set_filteredCourses(resp.data.data);
       })
       .catch((ex) => {

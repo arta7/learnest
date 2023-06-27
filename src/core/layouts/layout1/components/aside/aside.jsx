@@ -42,7 +42,7 @@ const tabItems = [
     title: "یادداشت های من",
   },
   { id: 2, link: "/rules", title: "قوانین سایت" },
-  { id: 7, link: "/cantactUs", title: "ارتباط با ما " },
+  { id: 6, link: "/contacts", title: "ارتباط با ما " },
   { id: 3, link: "/howToUseSite", title: "ویدیوی آموزش اپلیکیشن" },
   { id: 4, link: "/referer-dashboard", title: "صفحه‌ی معرف" },
   { id: 5, link: "/bookmarks", title: "سوالات نشان شده" },
@@ -74,6 +74,12 @@ const Aside = (props) => {
   const [seeSiteRules, set_seeSiteRules] = useState(false);
   const handle_seeSiteRules = () => {
     set_seeSiteRules(!seeSiteRules);
+  };
+
+  const [seeSiteContacts, set_seeSiteContacts] = useState(false);
+
+  const handle_seeSiteContacts = () => {
+    set_seeSiteContacts(!seeSiteContacts);
   };
 
   const [openHowToUseApp, set_openHowToUseApp] = useState(false);
@@ -135,7 +141,7 @@ const Aside = (props) => {
         </div>
         <div className="my-3 mx-3 align-self-start d-flex flex-column justify-content-between align-items-stretch">
           {tabItems.map(({ link, id, title }, index) => {
-            if (link === "/rules" || link === "/howToUseSite") {
+            if (link === "/rules" || link === "/howToUseSite" ) {
               return (
                 <Link
                   to={link}
@@ -143,6 +149,7 @@ const Aside = (props) => {
                     e.preventDefault();
                     if (link === "/rules") handle_seeSiteRules();
                     if (link === "/howToUseSite") handle_openHowToUseApp();
+                   
                   }}
                   className="m-0 my-3 text-dark p-0 d-flex flex-row justify-content-start align-items-center text-decoration-none"
                   key={id}
@@ -154,7 +161,7 @@ const Aside = (props) => {
                       }
                       color="primary"
                     />
-                  ) : (
+                  )  : (
                     <PlayCircleOutlineIcon
                       id="openHowToUseApp"
                       className={
@@ -166,6 +173,29 @@ const Aside = (props) => {
                   {title}
                 </Link>
               );
+            }
+            if(link === "/contacts")
+            {
+              return (
+                <Link
+                to={link}
+                onClick={(e) => {
+                  e.preventDefault();
+                  if(link === "/contacts") handle_seeSiteContacts();
+                }}
+                className="m-0 my-3 text-dark p-0 d-flex flex-row justify-content-start align-items-center text-decoration-none"
+                key={id}
+              >
+                  <RuleIcon
+                    className={
+                     (index === 6 ? "ms-1" : "") + " me-2"
+                    }
+                    color="primary"
+                  />
+                  {title}
+                  </Link>
+                
+              )
             }
             if (!profileData?.refferalCode && link === "/referer-dashboard") {
               return <></>;
@@ -281,6 +311,32 @@ const Aside = (props) => {
           تراکنش‌ها، اطلاعات را از پایگاه دادهٔ خود حذف نمی‌کند
         </p>
       </Dialog>
+
+      <Dialog open={seeSiteContacts} onClose={handle_seeSiteContacts}>
+        <p className="p-3" style={{ lineHeight: "1.7rem" }}>
+         شماره پشتیبانی : <a href="tel:09036697482"> 09036697482 </a>
+          <br />
+          <br />
+           ساعت پاسخگویی شنبه تا چهارشنبه از ساعت 10 الی 15
+          <br />
+          <br />
+          پنجشنبه از ساعت 10 الی 14
+          <br />
+          <br />
+          ارتباط با پشتیبانان فنی در واتساپ و تلگرام و بله در تمامی ساعات روز : <a href="tel:09036697482"> 09036697482 </a>
+          <br />
+          <br />
+          پیج اینستاگرام : <a href="https://www.instagram.com/Learnest.app"> Learnest.app </a> 
+          <br />
+          <br />
+           کانال تلگرام :  <a href="https://t.me/Learnestenglish"> Learnestenglish </a> 
+          <br />
+          <br />
+        </p>
+      </Dialog>
+
+
+
       <Dialog open={openHowToUseApp} onClose={handle_openHowToUseApp}>
         <div
           className="m-0 p-3 d-flex flex-row justify-content-center align-items-center"

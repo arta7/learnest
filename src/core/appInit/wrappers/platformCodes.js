@@ -15,7 +15,7 @@ const PlatformCodes = ({ children }) => {
   const location = useLocation();
   //////////
   useEffect(() => {
-    if (checkWebview(location.search)) {
+    if (!checkWebview(location.search)) {
       if (isIos()) {
         if (!isChromeOrSafari()) {
           navigate("/browser-error", { replace: true });

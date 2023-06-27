@@ -45,6 +45,7 @@ const CourseDetailsSkeleton = () => {
               className={
                 " w-100 p-3 ps-2 py-2  position-relative d-flex flex-column justify-content-start align-items-stretch rounded-20 detail-card"
               }
+              
             >
               <div
                 style={{ maxHeight: "90px" }}
