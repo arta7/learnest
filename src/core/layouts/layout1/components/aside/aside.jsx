@@ -314,7 +314,7 @@ const Aside = (props) => {
 
       <Dialog open={seeSiteContacts} onClose={handle_seeSiteContacts}>
         <p className="p-3" style={{ lineHeight: "1.7rem" }}>
-         شماره پشتیبانی : 09036697482
+         شماره پشتیبانی : <a href="tel:09036697482"> 09036697482 </a>
           <br />
           <br />
            ساعت پاسخگویی شنبه تا چهارشنبه از ساعت 10 الی 15
@@ -323,13 +323,13 @@ const Aside = (props) => {
           پنجشنبه از ساعت 10 الی 14
           <br />
           <br />
-          ارتباط با پشتیبانان فنی در واتساپ و تلگرام و بله در تمامی ساعات روز : 09036697482
+          ارتباط با پشتیبانان فنی در واتساپ و تلگرام و بله در تمامی ساعات روز : <a href="tel:09036697482"> 09036697482 </a>
           <br />
           <br />
-          پیج اینستاگرام : Learnest.app
+          پیج اینستاگرام : <a href="https://www.instagram.com/Learnest.app"> Learnest.app </a> 
           <br />
           <br />
-           کانال تلگرام : Learnestenglish
+           کانال تلگرام :  <a href="https://t.me/Learnestenglish"> Learnestenglish </a> 
           <br />
           <br />
         </p>

@@ -209,6 +209,41 @@ const LevelsSection = ({ gem, level, scores, className, interaction }) => {
       >
         تعیین سطح
       </Button>
+
+      <Button
+        className="w-100 py-2 mb-3"
+        variant="contained"
+        color="primary"
+        onClick={() => {
+          navigate("/level-determine");
+        }}
+      >
+        دوره ی امریکن انگلیش فایل 
+      </Button>
+
+
+      <Button
+        className="w-100 py-2 mb-3"
+        variant="contained"
+        color="primary"
+        onClick={() => {
+          navigate("/level-determine");
+        }}
+      >
+         مینی دوره ی گرامر
+      </Button>
+
+
+      <Button
+        className="w-100 py-2 mb-3"
+        variant="contained"
+        color="primary"
+        onClick={() => {
+          navigate("/level-determine");
+        }}
+      >
+         آموزش های رایگان
+      </Button>
     </div>
   );
 };

@@ -206,7 +206,7 @@ const ExtraIndexPage = (props) => {
     <section className="m-0 p-3 tiny-scrollbar w-100">
       {!extraResp && (
         <div className="w-100 m-0 p-0 d-flex flex-column justify-content-start align-items-stretch">
-          <ExtraSkeleton type={1} title="ویدیو های how to" />
+          {/* <ExtraSkeleton type={1} title="ویدیو های how to" /> */}
           <ExtraSkeleton type={1} title={"موزیک ویدیو "} />
           <ExtraSkeleton type={1} title={"پادکست"} />
           <ExtraSkeleton type={2} title="مجله" />
@@ -216,13 +216,13 @@ const ExtraIndexPage = (props) => {
       )}
       {extraResp && (
         <>
-          <ExtraSection
+          {/* <ExtraSection
             className="my-3"
             title={"ویدیوهای how to"}
             data={extraData?.educationalVideo}
             item={ExtraType1}
             type="educationalVideo"
-          />
+          /> */}
           <ExtraSection
             className="my-4"
             title={"داستان صوتی"}

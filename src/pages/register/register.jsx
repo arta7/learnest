@@ -842,7 +842,7 @@ import { useNavigate, Link } from "react-router-dom";
 
 // CONTEXTS
 import {
-  useLoginContext,
+  useLoginContext2,
   useAuthenticationActions,
 } from "../../core/contexts/authentication/authenticationProvider";
 import { useLoadingContext } from "../../core/contexts/loading/loading";
@@ -936,6 +936,7 @@ function Register() {
   // DRAWERS STYLE
   const classes = useStyles();
   const [phoneNum, set_phoneNum] = useState("");
+  const[currentuuid,setcurrentuuid] = useState('')
   // LOADING METHODS
   const { handleClose, handleOpen } = useLoadingContext();
 
@@ -946,7 +947,7 @@ function Register() {
   const PhoneNumberRef = useRef(null);
 
   // AUTHENTICATION FUNCTIONS
-  const { login, register, verify } = useAuthenticationActions();
+  const { login, register, verify,loginevano } = useAuthenticationActions();
 
   /////==============================////////////
   ///////////   LOGIN CODES : START   ///////////
@@ -1003,6 +1004,21 @@ function Register() {
     //end loading
     handleClose();
   };
+
+
+  useEffect(()=>{
+    // window.ewano.onWebAppReady();
+
+
+     var myOldUrl = window.location.href;
+     console.log('term 1 : ',myOldUrl)
+    if(myOldUrl.split('id=').length>1)
+    {
+    setcurrentuuid(myOldUrl.split('id=')[1])
+    }
+
+ },[])
+
 
   /////==============================////////////
   ///////////   LOGIN CODES : END   /////////////
@@ -1112,7 +1128,7 @@ function Register() {
 
   const [show_veifyDrawer, set__show_veifyDrawer] = useState(false);
   const [verifyCode, setVerifyCode] = useState("");
-  const { handle_setToken } = useAuthenticationActions();
+  const { handle_setToken,handle_setaddress } = useAuthenticationActions();
   const [compeleted, set_compeleted] = useState();
   const countdownRef = useRef();
 
@@ -1122,6 +1138,8 @@ function Register() {
     }
     set__show_veifyDrawer(!show_veifyDrawer);
   };
+
+  
 
   const handleResendCode = async () => {
     //start loading
@@ -1170,12 +1188,55 @@ function Register() {
             toast.success("به لرنست خوش آمدید .");
             handle_setToken(resp.data?.data?.token);
             navigate("/", { replace: true });
+          
           } else {
             toast.error("کد وارد شده اشتباه میباشد .");
           }
         } else {
           toast.error("ورود به حساب با خطا مواجه شد");
         }
+      })
+      .catch((ex) => {
+        console.log(ex);
+        // btnRef.current.removeAttribute("disabled");
+        toast.error("ورود به حساب با خطا مواجه شد");
+        return null;
+      });
+
+    //end loading
+    handleClose();
+  };
+
+
+  const handleSubmit_loginEvano = async (e) => {
+
+    //start loading
+    handleOpen();
+
+    //call api login
+    await loginevano(currentuuid)
+      .then((resp) => {
+        if (resp.status === 200) {
+          
+          if (resp.data?.data !== null) {
+            toast.success("به لرنست خوش آمدید .");
+            
+            handle_setToken(resp.data?.data?.token);
+            
+            navigate("/", { replace: true });
+            console.log('Login :',resp)
+            handle_setaddress("2")
+          } else {
+            toast.error(resp.data.message);
+            console.log('Login :',resp)
+
+          }
+        } else {
+          toast.error("ورود به حساب با خطا مواجه شد");
+        }
+
+        return resp;
+
       })
       .catch((ex) => {
         console.log(ex);
@@ -1262,7 +1323,7 @@ function Register() {
           className="p-3 "
         >
           <Button
-            onClick={toggle_loginDrawer}
+            onClick={handleSubmit_loginEvano}
             color="primary"
             variant="contained"
             className="w-100 py-2"

@@ -19,11 +19,13 @@ const CoursesPage = () => {
         headers: {
           // authorization: localStorage.getItem("learnestToken"),
           "Cache-Control": "public,max-age=1, stale-while-revalidate=119",
+          "Version": "ewano"
         },
       })
       .then((resp) => {
         // console.log(resp.data.data);
         set_courses(resp.data.data);
+        console.log('resp.data.data',resp.data.data);
         set_filteredCourses(resp.data.data);
       })
       .catch((ex) => {

@@ -4,6 +4,7 @@ export const API_URLs = {
   authentincation: {
     signup: baseUrl + "/students/signup",
     login: baseUrl + "/students/login",
+    loginevano: baseUrl + "/ewano/loginwithtokenid?id=",
     verify: baseUrl + "/students/verify",
     refreshToken: baseUrl + "/students/refreshtoken",
   },
@@ -58,10 +59,12 @@ export const API_URLs = {
     suggestedstartdateforcourse:
       baseUrl + "/courses/suggestedstartdateforcourse",
     buycourseCheckout: baseUrl + "/courses/buycourse",
-    paycoursefactor: baseUrl + "/courses/paycoursefactor",
+    paycoursefactor: baseUrl + "/ewano/paycoursefactor",
+    paycoursefactor1: baseUrl + "/courses/paycoursefactor",
     deleteInvitement: baseUrl + "/courses/deleteinvitetoclasssroom",
     rejectInvitement: baseUrl + "/courses/rejectinvitetoclasssroom",
     checkoutRefferCode: baseUrl + "/courses/checkreffercode",
+    verifyPayment : baseUrl + "/ewano/verifycoursefactor",
   },
   exam: {
     getExam: baseUrl + "/courses/getexam",

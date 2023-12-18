@@ -16,6 +16,8 @@ import { useLocation, useNavigate } from "react-router";
 import { formatNumber } from "../../../../core/utils/formatPrice";
 import InfoIcon from "@mui/icons-material/Info";
 import { CheckCircle } from "@mui/icons-material";
+import { useFactor,useAuthenticationActions } from "./../../../../core/contexts/authentication/authenticationProvider";
+
 
 const BuyCourseFourthPage = (props) => {
   const paymentGateLink_ref = useRef();
@@ -29,6 +31,7 @@ const BuyCourseFourthPage = (props) => {
   } = useLoadingContext();
   const [finalAmount, set_finalAmount] = useState();
   const navigate = useNavigate();
+  const { handle_setFactor } = useAuthenticationActions()
 
   const handlRefferCodeChange = (e) => {
     const { value } = e.target;
@@ -40,6 +43,56 @@ const BuyCourseFourthPage = (props) => {
   useEffect(() => {
     console.log(factor);
   }, [factor]);
+
+
+   let runWindow=(amount,id)=>{
+      window.ewano.onWebAppReady();
+              // 
+              //  navigate('/shippment')
+              window.ewano.pay(amount*10,id, '')
+              window.ewano.paymentResult = (status) => { 
+                var factorId =   localStorage.getItem("factorId")
+                console.log('factorId2 : > ',factorId)
+                console.log('status2 : ',status)
+                if (status == true) {
+                  apiCaller({
+                    api: buyCourse_apiCalls.apiCall_verifycoursefactor,
+                    apiArguments: factorId,
+                    onError: (ex) => {
+                      localStorage.removeItem("factorId");
+                      console.log('ex',ex)
+                      if (ex?.data?.message) {
+                        toast.error(ex?.data?.message);
+                      }
+          
+                      handleClose();
+                    },
+                    onSuccess: (resp) => {
+                     
+                      console.log('resp?.response?.data',resp?.data?.message)
+                  toast.success(
+                    <div className="text-wrap">
+                      {resp?.data?.message}
+                    </div>
+                  );
+                  localStorage.removeItem("factorId");
+                      navigate('/allcourses')
+          
+                    },
+                    onEnd: handleClose,
+                  })
+                }
+                else {
+                  toast.success(
+                    <div className="text-wrap">
+                      {"پرداخت شما  با مشکل مواجه شده در صورت نیاز به راهنمایی با پشتیانی تماس بگیرید."}
+                    </div>
+                  );
+                  navigate('/allcourses')
+          
+                }
+              }
+    }
 
   //2
   useEffect(() => {
@@ -166,6 +219,9 @@ const BuyCourseFourthPage = (props) => {
         set_finalAmount(response?.data?.data?.finalAmount);
 
         if (!factorClone.isTemp) {
+          handle_setFactor(response?.data?.data?.factorId)
+          localStorage.setItem("factorId", response?.data?.data?.factorId)
+          // console.log('response?.data?.data?.factorId',response?.data?.data?.factorId)
           apiCaller({
             api: buyCourse_apiCalls.apiCall_paycoursefactor,
             apiArguments: response?.data?.data?.factorId,
@@ -176,8 +232,10 @@ const BuyCourseFourthPage = (props) => {
               handleClose();
             },
             onSuccess: (resp) => {
-              paymentGateLink_ref.current.href = resp.data.data;
-              paymentGateLink_ref.current.click();
+              console.log('response buy',resp?.data?.data)
+              runWindow(resp?.data?.data?.amount, resp?.data?.data?.id)
+              // paymentGateLink_ref.current.href = resp.data.data;
+              // paymentGateLink_ref.current.click();
             },
             onEnd: handleClose,
           });

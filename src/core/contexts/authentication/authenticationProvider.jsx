@@ -91,6 +91,8 @@ export const UserLoginProvider = ({ children }) => {
   const [status, setStatus] = useState("process");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [token, setToken] = useState(http?.getToken() || "");
+  const [address, setaddress] = useState("1");
+  const [factorId, setFactorId] = useState("");
 
   return (
     <UserLoginContext.Provider
@@ -98,9 +100,13 @@ export const UserLoginProvider = ({ children }) => {
         status,
         phoneNumber,
         token,
+        address,
+        factorId,
         setStatus,
         setPhoneNumber,
         setToken,
+        setaddress,
+        setFactorId,
       }}
     >
       {children}
@@ -112,11 +118,25 @@ function useLoginContext() {
   return useContext(UserLoginContext);
 }
 
+function useLoginContext2() {
+  return useContext(UserLoginContext);
+}
+
+function useFactor() {
+  return useContext(UserLoginContext);
+}
+
 function useAuthenticationActions() {
   const { setToken } = useLoginContext();
+  const { setaddress } = useLoginContext2();
+  const { setFactorId } = useFactor();
 
   const login = async (phoneNumber1,IsPhone) => {
     return authentication_apiCalls.apiCall_login(phoneNumber1,IsPhone);
+  };
+
+  const loginevano = async (id) => {
+    return authentication_apiCalls.apiCall_loginfromEvano(id);
   };
 
   const register = async ({ phoneNumber, firstName, lastName,IsPhone, gender }) => {
@@ -155,9 +175,17 @@ function useAuthenticationActions() {
     http.setToken(token);
   };
 
-  return { login, verify, register, handle_setToken, logout };
+  const handle_setaddress = (addres) => {
+    setaddress(addres);
+  };
+
+  const handle_setFactor = (factor) => {
+    setFactorId(factor);
+  };
+
+  return { login, verify, register, handle_setToken, logout,loginevano,handle_setaddress,handle_setFactor };
 }
 
-export { useLoginContext, useAuthenticationActions };
+export { useLoginContext, useAuthenticationActions,useLoginContext2,useFactor };
 export default UserLoginProvider;
 

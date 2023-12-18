@@ -13,10 +13,20 @@ import AppInitializeWrapper from "./core/appInit/appInit";
 import NotificationsProvider from "./core/contexts/notifications/notificationsCTX";
 import { ErrorBoundary } from "react-error-boundary";
 import { ErrorFallback } from "./components/errorBoundry.component";
+import queryString from "query-string"
+
 const safeAreaInsets = require("safe-area-insets");
 
 function App() {
   const { width: windowInnerWidth } = useWindowDimensions();
+  // useEffect(()=>{
+  //   window.ewano.onWebAppReady();
+  //   const queryParams = new URLSearchParams("https://ewano.learnest.app/?id=")
+  //   const term = queryParams.get("id")
+  //   console.log('term : ',term)
+
+  
+
   // useEffect(() => {
   //   alert(JSON.stringify(safeAreaInsets));
   // }, [safeAreaInsets]);

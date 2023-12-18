@@ -111,6 +111,14 @@ export const apiCall_login = async (phoneNumber,IsPhone) => {
   return http.post(auth_apis.login, formdata);
 };
 
+export const apiCall_loginfromEvano = async (id) => {
+  const formdata = new FormData();
+
+  formdata.append("", "");
+    console.log('auth_apis.loginevano+id : ',auth_apis.loginevano+id)
+  return http.post(auth_apis.loginevano+id);
+};
+
 export const apiCall_verify = async ({ phoneNumber, verifyCode,IsPhone }) => {
   const formdata = new FormData();
 

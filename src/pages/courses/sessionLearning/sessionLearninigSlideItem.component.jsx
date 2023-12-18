@@ -99,10 +99,11 @@ const CourseVideoItem = ({
 
   const handleVideoEnded = () => {
     set_videoEnded(true);
-    if (
-      data.hasOwnProperty("hasNotSeenLessonVideoYet") &&
-      data?.questions?.length === 0
-    ) {
+    //if (
+     // data.hasOwnProperty("hasNotSeenLessonVideoYet") 
+     // && data?.questions?.length === 0
+    //) 
+    {
       handleShowConfetti();
       toast.success(
         <div className="text-wrap">
@@ -110,7 +111,8 @@ const CourseVideoItem = ({
         </div>
       );
     }
-    if (data?.questions?.length > 0) {
+    //if (data?.questions?.length > 0) 
+    {
       callCompleteLearningApi();
     }
   };
@@ -125,7 +127,10 @@ const CourseVideoItem = ({
   const [completeLearningApiCalled, set_completeLearningApiCalled] =
     useState(false);
   const handleStart = async () => {
-    if (data?.questions?.length === 0 && !completeLearningApiCalled) {
+    // if (
+    //   data?.questions?.length === 0 &&
+    //    !completeLearningApiCalled) 
+    {
       callCompleteLearningApi();
     }
   };

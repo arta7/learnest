@@ -285,11 +285,11 @@ const DetailCardItem = ({ data, title, cardIndex }) => {
             <div className="m-0 p-0 ps-2 flex-grow-1 d-flex flex-column justify-content-center align-items-start">
               <span
                 className={
-                  (width < 420 && width > 380
+                  (width < 420 && width > 320
                     ? "fs-7"
-                    : width < 380
+                    : width < 320
                     ? "fs-8"
-                    : "") + " text-nowrap "
+                    : "") + " text-wrap "
                 }
               >
                 {data[0]?.title}
